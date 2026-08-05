@@ -10,6 +10,7 @@ class InfoPage extends StatefulWidget {
 
 class _InfoPageState extends State<InfoPage> {
   String selectedCurrency = "€";
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,9 @@ class _InfoPageState extends State<InfoPage> {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(20),
-          child: Column(
+          child: Form(
+            key: _formKey,
+            child: Column(
             children: [
               // First row
               Row(
@@ -31,11 +34,17 @@ class _InfoPageState extends State<InfoPage> {
                   const SizedBox(width: 50),
                   // Space between text and field const
                   SizedBox( width: 500,
-                    child: TextField( decoration:
+                    child: TextFormField( decoration:
                     InputDecoration(
                       hintText: "Enter your username",
                       border: OutlineInputBorder(),
                     ),
+                      validator: (value) {
+                        if (value == null || value.trim().isEmpty){
+                          return "Please enter your username";
+                        }
+                        return null;
+                      },
                     ),
                   ),
                 ],
@@ -52,13 +61,19 @@ class _InfoPageState extends State<InfoPage> {
                   const SizedBox(width: 50),
                   // Space between text and field const
                   SizedBox( width: 500,
-                    child: TextField(
+                    child: TextFormField(
                       keyboardType: TextInputType.number,
                       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                       decoration: InputDecoration(
                       hintText: "Enter age",
                       border: OutlineInputBorder(),
                     ),
+                      validator: (value) {
+                        if (value == null || value.trim().isEmpty){
+                          return "Please enter your age";
+                        }
+                        return null;
+                      },
                     ),
                   ),
                 ],
@@ -75,13 +90,19 @@ class _InfoPageState extends State<InfoPage> {
                   const SizedBox(width: 50),
                   // Space between text and field const
                   SizedBox( width: 500,
-                    child: TextField(
+                    child: TextFormField(
                       keyboardType: TextInputType.number,
                       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                       decoration: InputDecoration(
                         hintText: "Enter Monthly Income",
                         border: OutlineInputBorder(),
                       ),
+                      validator: (value) {
+                        if (value == null || value.trim().isEmpty){
+                          return "Please enter your monthly income";
+                        }
+                        return null;
+                      },
                     ),
                   ),
                   const SizedBox(width: 10),
@@ -107,6 +128,8 @@ class _InfoPageState extends State<InfoPage> {
                   ),
                 ],
               ),
+              const SizedBox(height: 20),
+              //Fourth Row
               Row(
                 children: [
                   const Text( "Bonuses",
@@ -114,13 +137,19 @@ class _InfoPageState extends State<InfoPage> {
                   ),
                   const SizedBox(width: 50),
                   SizedBox( width: 500,
-                    child: TextField(
+                    child: TextFormField(
                       keyboardType: TextInputType.number,
                       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                       decoration: InputDecoration(
                         hintText: "Enter Bonuses",
                         border: OutlineInputBorder(),
                       ),
+                      validator: (value) {
+                        if (value == null || value.trim().isEmpty){
+                          return "Please enter bonuses";
+                        }
+                        return null;
+                      },
                     ),
                   ),
                   const SizedBox(width: 10),
@@ -145,10 +174,25 @@ class _InfoPageState extends State<InfoPage> {
                     ),
                   ),
                 ]
+              ),
+              const SizedBox(height: 20),
+              //Button to confirm
+              Row(
+                children: [
+                  ElevatedButton(
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      //Every field  is filled then pass to next page
+                    }
+                  },
+                    child: const Text("Next")
+                  )
+                ]
               )
             ],
           ),
         ),
+      ),
       ),
     );
   }
