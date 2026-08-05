@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'fixed_expenses.dart';
 
 class InfoPage extends StatefulWidget {
   const InfoPage({super.key});
@@ -33,7 +34,7 @@ class _InfoPageState extends State<InfoPage> {
                   ),
                   const SizedBox(width: 50),
                   // Space between text and field const
-                  SizedBox( width: 500,
+                  Expanded(
                     child: TextFormField( decoration:
                     InputDecoration(
                       hintText: "Enter your username",
@@ -60,7 +61,7 @@ class _InfoPageState extends State<InfoPage> {
                   ),
                   const SizedBox(width: 50),
                   // Space between text and field const
-                  SizedBox( width: 500,
+                  Expanded(
                     child: TextFormField(
                       keyboardType: TextInputType.number,
                       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
@@ -89,7 +90,7 @@ class _InfoPageState extends State<InfoPage> {
                   ),
                   const SizedBox(width: 50),
                   // Space between text and field const
-                  SizedBox( width: 500,
+                  Expanded(
                     child: TextFormField(
                       keyboardType: TextInputType.number,
                       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
@@ -136,7 +137,7 @@ class _InfoPageState extends State<InfoPage> {
                   style: TextStyle(fontSize : 18),
                   ),
                   const SizedBox(width: 50),
-                  SizedBox( width: 500,
+                  Expanded(
                     child: TextFormField(
                       keyboardType: TextInputType.number,
                       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
@@ -183,6 +184,12 @@ class _InfoPageState extends State<InfoPage> {
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       //Every field  is filled then pass to next page
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const FixedExpenses(),
+                          ),
+                      );
                     }
                   },
                     child: const Text("Next")
