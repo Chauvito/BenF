@@ -13,7 +13,7 @@ class _InfoPageState extends State<InfoPage> {
   String selectedCurrency = "€";
   final _formKey = GlobalKey<FormState>();
   final TextEditingController incomeController = TextEditingController();
-
+  final TextEditingController bonusController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -141,6 +141,7 @@ class _InfoPageState extends State<InfoPage> {
                   const SizedBox(width: 50),
                   Expanded(
                     child: TextFormField(
+                      controller: bonusController,
                       keyboardType: TextInputType.number,
                       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                       decoration: InputDecoration(
@@ -185,7 +186,7 @@ class _InfoPageState extends State<InfoPage> {
                   ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      int income= int.parse(incomeController.text);
+                      int income= int.parse(incomeController.text) + int.parse(bonusController.text);
                       //Every field  is filled then pass to next page
                       Navigator.push(
                           context,
