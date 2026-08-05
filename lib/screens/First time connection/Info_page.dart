@@ -88,7 +88,7 @@ class _InfoPageState extends State<InfoPage> {
                   SizedBox(
                     width: 80,
                     child: DropdownButtonFormField<String>(
-                      value: selectedCurrency,
+                      initialValue: selectedCurrency,
                       decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                     ),
@@ -127,7 +127,7 @@ class _InfoPageState extends State<InfoPage> {
                   SizedBox(
                     width: 80,
                     child: DropdownButtonFormField<String>(
-                      value: selectedCurrency,
+                      initialValue: selectedCurrency,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                       ),
