@@ -12,6 +12,7 @@ class InfoPage extends StatefulWidget {
 class _InfoPageState extends State<InfoPage> {
   String selectedCurrency = "€";
   final _formKey = GlobalKey<FormState>();
+  final TextEditingController incomeController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -92,6 +93,7 @@ class _InfoPageState extends State<InfoPage> {
                   // Space between text and field const
                   Expanded(
                     child: TextFormField(
+                      controller: incomeController,
                       keyboardType: TextInputType.number,
                       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                       decoration: InputDecoration(
@@ -183,11 +185,14 @@ class _InfoPageState extends State<InfoPage> {
                   ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
+                      int income= int.parse(incomeController.text);
                       //Every field  is filled then pass to next page
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const FixedExpenses(),
+                              builder: (context) => FixedExpenses(
+                                monthlyIncome: income,
+                              ),
                           ),
                       );
                     }
