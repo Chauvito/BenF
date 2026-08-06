@@ -174,12 +174,26 @@ void dispose() {
                         Expanded(child: ElevatedButton(
                           child: const Text("Done"),
                             onPressed: (){
+                            if(remaining > 0)
+                            {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => const HomePage(),
                                   )
                               );
+                            }
+                            else
+                              {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text(
+                                      "You are projecting to use more money than available. Please reduce your planned expenses.",
+                                    ),
+                                    backgroundColor: Colors.red,
+                                  ),
+                                );
+                              }
                             },))
                       ]
                     )
