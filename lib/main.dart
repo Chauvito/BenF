@@ -1,7 +1,5 @@
-import 'package:ben_f/screens/First%20time%20connection/info_page.dart';
-import 'package:ben_f/screens/home_page.dart';
+import 'package:ben_f/screens/login.dart';
 import 'package:flutter/material.dart';
-import 'pages/home_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
       ),
-      home: const InfoPage(), // This is your page
+      home: const LoginPage(), // This is your page
     );
   }
 }
