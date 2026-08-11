@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'First time connection/register.dart';
+
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -99,7 +101,24 @@ class _LoginPageState extends State<LoginPage> {
                       child: ElevatedButton(
                         onPressed: submit,
                         child: const Text("Submit"),
-                        //Must send to database to check whether first connection or not, then decide which page user will access
+                        //Encrypt password before send it to data server
+                        //
+                      ),
+                    ),
+
+                    const SizedBox(height: 30),
+
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.push( context,
+                            MaterialPageRoute(builder: (context) => RegisterPage(),
+                            ),
+                          );
+                        },
+                        child: const Text("New member"),
+
                       ),
                     ),
                   ],
