@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:ben_f/services/auth_service.dart';
 import 'First time connection/register.dart';
 
 class LoginPage extends StatefulWidget {
@@ -11,6 +11,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
+  final AuthService authService = AuthService();
 
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -22,16 +23,26 @@ class _LoginPageState extends State<LoginPage> {
     super.dispose();
   }
 
-  void submit() {
-    if (_formKey.currentState!.validate()) {
-      String username = usernameController.text;
-      String password = passwordController.text;
-
-      print("Username: $username");
-      print("Password: $password");
-
-      // Must do : Authenticate the user
+  Future<void> submit() async{
+    if (!_formKey.currentState!.validate()) {
+      return;
     }
+
+      final username = usernameController.text.trim();
+      final password = passwordController.text;
+
+      final success = await authService.login(
+      username,
+      password,
+      );
+
+      if (success) {
+        print("Login successful");
+      }
+      else {
+        print("Wrong username or password");
+      }
+      // Must do : Authenticate the use
   }
 
   @override

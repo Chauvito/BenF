@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:ben_f/services/auth_service.dart';
 import 'info_page.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -11,7 +11,7 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
 final _formKey = GlobalKey<FormState>();
-
+final AuthService authService = AuthService();
 final TextEditingController usernameController = TextEditingController();
 final TextEditingController passwordController = TextEditingController();
 
@@ -22,20 +22,29 @@ passwordController.dispose();
 super.dispose();
 }
 
-void submit() {
+Future<void> submit() async{
   if (_formKey.currentState!.validate()) {
-    String username = usernameController.text;
-    String password = passwordController.text;
-    print("Username: $username");
-    print("Password: $password");
+    return;
+  }
+    final username = usernameController.text.trim();
+    final password = passwordController.text;
 
-// Must do : Send to data server
+    final success = await authService.register(
+      username,
+      password,
+    );
+
+  if (success) {
+    print("Account created!");
     Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => InfoPage(),
       ),
     );
+    // Navigate to login
+  } else {
+    print("Registration failed");
   }
 }
 
